@@ -1,6 +1,16 @@
 import os, sys
 import numpy as np
-import csv
+import argparse
+
+# 本プログラムの説明
+parser = argparse.ArgumentParser(description='認識したクラス数のカウントを行う')
+
+# 引数指定
+parser.add_argument('Dir', help='カウントを行うディレクトリ')
+parser.add_argument('num', help='カウントしたいID')
+
+args = parser.parse_args()
+
 
 # カウントしたいID
 ID_count = int(sys.argv[2])
@@ -29,6 +39,7 @@ def main():
                 else:
                     # 誤認識したクラスを取得
                     ID_err.append(ID)
+                    print(f"不正解したファイル名は{file}")
                     break  # 単に誤認識クラスを確認したいときはここをコメントアウト
             # 未検出なら
             if len(contents[:,0]) == 0:
